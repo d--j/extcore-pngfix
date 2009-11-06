@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>pngfix test</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/ext-core/3/ext-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/pngfix.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+         a img {
+           border:none;  
+         }
+        .bg {
+            background: #DDD url('bg.jpg') no-repeat scroll top left;
+            width:400px;
+            height:400px;
+        }
+        .bg-circle {
+            background: transparent url('circle-trans.png') no-repeat scroll top left;
+            width:400px;
+            height:400px;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        Ext.onReady(function(){
+           Ext.ux.PngFix(); 
+        });
+    </script>
+</head>
+<body>
+<div class="bg"><img src="circle-trans.png" width="400" height="400" alt="Circle Trans"></div>
+<div class="bg"><a href="http://extjs.com"><img src="circle-trans.png" width="400" height="400" alt="Circle Trans"></a></div>
+<div class="bg"><div class="bg-circle"></div></div>
+</body>
+</html>
