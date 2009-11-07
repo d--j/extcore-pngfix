@@ -9,6 +9,11 @@
          a img {
            border:none;  
          }
+         img.bordered {
+             border:3px solid green;
+             padding:5px;
+             margin:5px;
+         }
         .bg {
             background: #DDD url('bg.jpg') no-repeat scroll top left;
             width:400px;
@@ -21,6 +26,7 @@
         }
     </style>
     <script type="text/javascript" charset="utf-8">
+        Ext.BLANK_IMAGE_URL = 's.gif';
         Ext.onReady(function(){
            Ext.ux.PngFix(); 
         });
@@ -30,5 +36,8 @@
 <div class="bg"><img src="circle-trans.png" width="400" height="400" alt="Circle Trans"></div>
 <div class="bg"><a href="http://extjs.com"><img src="circle-trans.png" width="400" height="400" alt="Circle Trans"></a></div>
 <div class="bg"><div class="bg-circle"></div></div>
+<div class="bg">
+    <a href="http://extjs.com"><img src="circle-trans.png" width="300" height="300" alt="Circle Trans" class="bordered"></a>
+</div>
 </body>
 </html>

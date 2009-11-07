@@ -18,22 +18,18 @@ Ext.onReady(function(){Ext.ux.PngFix();});
 (function(){
 Ext.ns('Ext.ux');
 
+// define Ext.BLANK_IMAGE_URL for ext core
+Ext.applyIf(Ext,{BLANK_IMAGE_URL:'http:/'+'/extjs.com/s.gif'});
+
 var BGSTYLE = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{0}',sizingMethod='scale')";
 
 function fixImagelikeElement(element){
-	var replacement = Ext.get(document.createElement('span')), rd = replacement.dom, rds = rd.style;
-	replacement.setWidth(element.getWidth()).setHeight(element.getHeight());
-	Ext.each(['className','id','titel'], function(property){
-		if (element.dom[property]) {
-			replacement.dom[property] = element.dom[property];
-		}
-	});
-	rds.filter = String.format(BGSTYLE, element.dom.src);
-	rds.display = 'inline-block';
+	var ed = element.dom, eds = ed.style;
 	if (element.parent('a')) {
-		rds.cursor = 'hand';
+		eds.cursor = 'hand';
 	}
-	replacement.replace(element);
+	eds.filter = String.format(BGSTYLE, ed.src);
+	ed.src = Ext.BLANK_IMAGE_URL;
 }
 function fixBackgroundForElement(element) {
 	var eds = element.dom.style, bgurl = element.getStyle('background-image').replace(/^\s*url\(\s*("|')?\s*/,'').replace(/\s*("|')?\s*\)\s*$/,'');

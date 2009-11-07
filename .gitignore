@@ -1,3 +1,5 @@
-pngfix-*
 doc/**
 **/.DS_Store
+releases
+deploy
+pngfix.jsb2
