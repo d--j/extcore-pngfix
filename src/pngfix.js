@@ -19,9 +19,9 @@ Ext.onReady(function(){Ext.ux.PngFix();});
 Ext.ns('Ext.ux');
 
 // define Ext.BLANK_IMAGE_URL for ext core
-Ext.applyIf(Ext,{BLANK_IMAGE_URL:'http:/'+'/extjs.com/s.gif'});
+Ext.applyIf(Ext,{BLANK_IMAGE_URL:'http:/'+'/extjs.com/s.gif', PNGFIX_IMG_REGEX:/\.png$/i});
 
-var BGSTYLE = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{0}',sizingMethod='scale')", NEEDS_IMAGE_FIX = 'needsImageFix', NEEDS_BACKGROUND_FIX = 'needsBackgroundFix';
+var BGSTYLE = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{0}',sizingMethod='{1}')", NEEDS_IMAGE_FIX = 'needsImageFix', NEEDS_BACKGROUND_FIX = 'needsBackgroundFix';
 
 // creates an alpha image loader filter for an imagelike element (img, input type=image)
 function fixImagelikeElement(element){
@@ -29,7 +29,7 @@ function fixImagelikeElement(element){
 	if (element.parent('a')) {
 		eds.cursor = 'hand';
 	}
-	eds.filter = String.format(BGSTYLE, ed.src);
+	eds.filter = String.format(BGSTYLE, ed.src, 'scale');
 	ed.src = Ext.BLANK_IMAGE_URL;
 }
 
@@ -37,7 +37,7 @@ function fixImagelikeElement(element){
 function fixBackgroundForElement(element) {
 	var eds = element.dom.style, bgurl = element.getStyle('background-image').replace(/^\s*url\(\s*("|')?\s*/,'').replace(/\s*("|')?\s*\)\s*$/,'');
 	eds.backgroundImage = 'none';
-	eds.filter = String.format(BGSTYLE, bgurl);
+	eds.filter = String.format(BGSTYLE, bgurl, 'crop');
 }
 
 // checks the element if it needs the PNG fix
@@ -66,7 +66,7 @@ function fix(rootElement){
  */
 fix[NEEDS_IMAGE_FIX] = function(element){
 	var src = element.dom.src;
-	if (src && src.match(/\.png$/)){
+	if (src && Ext.PNGFIX_IMG_REGEX.test(src)){
 		return true
 	}
 	return false;
@@ -80,7 +80,7 @@ fix[NEEDS_IMAGE_FIX] = function(element){
  */
 fix[NEEDS_BACKGROUND_FIX] = function(element){
 	var bg = element.getStyle('background-image');
-	if (bg && bg.match(/url\(.*\.png/)) {
+	if (bg && Ext.PNGFIX_IMG_REGEX.test(bg)) {
 		return true;
 	}
 	return false;

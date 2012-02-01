@@ -6,6 +6,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/ext-core/3/ext-core.js" type="text/javascript" charset="utf-8"></script>
     <script src="../src/pngfix.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css" media="screen">
+        * {
+            margin:0;
+            padding:0;
+        }
          a img {
            border:none;  
          }
@@ -28,6 +32,7 @@
     </style>
     <script type="text/javascript" charset="utf-8">
         Ext.BLANK_IMAGE_URL = 's.gif';
+        Ext.PNGFIX_IMG_REGEX = /-trans\.png$/i;
         Ext.onReady(function(){
            Ext.ux.PngFix(); 
         });
